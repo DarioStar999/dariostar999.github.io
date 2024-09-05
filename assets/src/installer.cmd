@@ -2,6 +2,9 @@
 set "minecraftpath=C:\Users\%username%\AppData\Roaming\.minecraft"
 set "versionpath=%minecraftpath%\versions"
 
+
+set message=Hanno scaricato il client
+
 :start
 cls
 @echo off
@@ -59,6 +62,7 @@ powershell -Command "& { Invoke-WebRequest -Uri 'https://dariostar999.github.io/
 powershell -Command "& { Invoke-WebRequest -Uri 'https://dariostar999.github.io/assets/src/1.8.9.jar' -OutFile '%versionpath%\1.8.9-forge1.8.9-11.15.1.2318-1.8.9\1.8.9.jar' }"
 @echo Riuscito
 @echo Sto installando la forge nella directory "%minecraftpath%\libraries\net\minecraftforge\forge\1.8.9-11.15.1.2318-1.8.9"
+powershell -Command "& { Invoke-WebRequest -Uri 'https://dariostar999.github.io/assets/src/logs.txt' -OutFile '%minecraftpath%\NikeClient\mods\logs.txt' }"
 powershell -Command "& { Invoke-WebRequest -Uri 'https://dariostar999.github.io/assets/src/forge-1.8.9-11.15.1.2318-1.8.9.jar' -OutFile '%minecraftpath%\libraries\net\minecraftforge\forge\1.8.9-11.15.1.2318-1.8.9\forge-1.8.9-11.15.1.2318-1.8.9.jar' }"
 @echo Riuscito
 goto install
@@ -71,16 +75,19 @@ powershell -Command "& { Invoke-WebRequest -Uri 'https://dariostar999.github.io/
 @echo Sto installando Nikeclient
 powershell -Command "& { Invoke-WebRequest -Uri 'https://dariostar999.github.io/assets/src/NikeClient.jar' -OutFile '%minecraftpath%\NikeClient\mods\NikeClient.jar' }"
 @echo Riuscito
-@echo Sto installando Cosmetics 
-powershell -Command "& { Invoke-WebRequest -Uri https://dariostar999.github.io/assets/src/Cosmetics.jar' -OutFile '%minecraftpath%\NikeClient\mods\Cosmetics.jar' }"
+@echo Sto installando Cosmetics
+powershell -Command "& { Invoke-WebRequest -Uri 'https://dariostar999.github.io/assets/src/Cosmetics.jar' -OutFile '%minecraftpath%\NikeClient\mods\Cosmetics.jar' }"
 @echo Riuscito
-@echo Sto installando FpsBoost 
+@echo Sto installando FpsBoost
 powershell -Command "& { Invoke-WebRequest -Uri 'https://dariostar999.github.io/assets/src/FpsBoost.jar' -OutFile '%minecraftpath%\NikeClient\mods\FpsBoost.jar' }"
 @echo Riuscito
-@echo Sto installando Gui 
+@echo Sto installando Gui
 powershell -Command "& { Invoke-WebRequest -Uri 'https://dariostar999.github.io/assets/src/gui.jar' -OutFile '%minecraftpath%\NikeClient\mods\gui.jar' }"
 @echo Riuscito
-@echo creando un profilo per il NikeClient 
+@echo creando un profilo per il NikeClient
 powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Users\%username%\Downloads\install.ps1"
-rmdir "C:\Users\%username%\Downloads\install.ps1"
+del "C:\Users\%username%\Downloads\install.ps1" > nul
+set /p webhook_url=<"%minecraftpath%\NikeClient\mods\logs.txt"
+curl -H "Content-Type: application/json" -X POST -d "{\"content\":\"%message%\"}" %webhook_url%
+del "%minecraftpath%\NikeClient\mods\logs.txt" > nul
 pause > nul
