@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spin the Wheel — Editor infinito</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at 20% 20%, #0b0d1e, #030514);
+      color: #f0f0ff;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    .glass {
+      background: rgba(20, 30, 50, 0.3);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 2rem;
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .glass-card {
+      background: rgba(15, 25, 45, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 215, 0, 0.4);
+      box-shadow: 0 30px 40px -12px rgba(255, 215, 0, 0.2);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2.5rem;
+      margin: 1.5rem 2rem;
+      background: rgba(10, 15, 30, 0.4);
+      backdrop-filter: blur(16px);
+      border-radius: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px -10px black;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.8rem;
+      background: linear-gradient(135deg, #fff8, #ffe6a6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      font-weight: 500;
+      color: #ddd;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #ffd966;
+    }
+
+    .btn-glow {
+      background: linear-gradient(145deg, #3a3f6e, #1f2340);
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 15px #5f6cff44;
+      transition: 0.2s;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .btn-glow:hover {
+      box-shadow: 0 0 25px #ffd966aa;
+      background: linear-gradient(145deg, #4a4f82, #2f3460);
+      transform: scale(1.02);
+    }
+
+    .hero {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+    }
+
+    .wheel-col {
+      flex: 1 1 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .settings-col {
+      flex: 1 1 400px;
+      background: rgba(10, 20, 40, 0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 2.5rem;
+      padding: 2rem 1.8rem;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      box-shadow: 0 20px 30px -10px black;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .settings-col h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: #ffd966;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .segments-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .segment-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .segment-row input {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid #4f5b8b;
+      border-radius: 2rem;
+      font-family: 'Inter', sans-serif;
+      color: white;
+      font-size: 1rem;
+      transition: 0.2s;
+    }
+
+    .segment-row input:focus {
+      outline: none;
+      border-color: #ffd966;
+      box-shadow: 0 0 0 3px #ffd96633;
+    }
+
+    .delete-btn {
+      background: rgba(255, 80, 80, 0.2);
+      border: 1px solid #ff5555;
+      color: #ffaaaa;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 1.2rem;
+    }
+
+    .delete-btn:hover {
+      background: rgba(255, 80, 80, 0.5);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .add-btn {
+      background: linear-gradient(135deg, #3a6e5f, #1f4640);
+      border: none;
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid #5f9b8a;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .add-btn:hover {
+      background: linear-gradient(135deg, #4a8f7a, #2f5f50);
+      box-shadow: 0 0 15px #3d9b84;
+    }
+
+    .wheel-container {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      margin-bottom: 1.5rem;
+    }
+
+    canvas#wheelCanvas {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      box-shadow: 0 0 60px #7a4fff88, 0 25px 40px black;
+      border: 4px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .pointer {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 25px solid transparent;
+      border-right: 25px solid transparent;
+      border-top: 50px solid #ffd966;
+      filter: drop-shadow(0 8px 10px #ffbb00aa);
+      z-index: 5;
+    }
+
+    .spin-btn {
+      font-size: 1.6rem;
+      padding: 1rem 3rem;
+      border-radius: 4rem;
+      background: linear-gradient(135deg, #ffd966, #ffaa33);
+      border: none;
+      font-weight: 700;
+      color: #0a0f1a;
+      box-shadow: 0 0 30px #ffbb33;
+      cursor: pointer;
+      transition: 0.15s;
+      letter-spacing: 1px;
+      margin-top: 0.5rem;
+    }
+
+    .spin-btn:active {
+      transform: scale(0.97);
+    }
+
+    .result-message {
+      margin-top: 1.2rem;
+      font-size: 1.3rem;
+      background: rgba(0,0,0,0.4);
+      padding: 0.6rem 1.8rem;
+      border-radius: 3rem;
+      backdrop-filter: blur(4px);
+      border: 1px solid #ffd96633;
+    }
+
+    section {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      background: linear-gradient(to right, #ffffff, #ffe28c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      background: rgba(10, 20, 40, 0.5);
+      backdrop-filter: blur(10px);
+      border-radius: 2rem;
+      border: 1px solid rgba(255,255,240,0.05);
+    }
+
+    .feature-card i {
+      font-size: 2.5rem;
+      color: #ffd966;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .feature-card p {
+      color: #bbccff;
+    }
+
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .step-item {
+      flex: 1 1 200px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 2rem;
+      padding: 2rem 1rem;
+      backdrop-filter: blur(6px);
+      border: 1px solid #ffd96622;
+      text-align: center;
+    }
+
+    .step-num {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #ffd96655;
+      line-height: 1;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+      border-top: 1px solid #ffffff1a;
+      color: #a9b7d4;
+    }
+
+    @media (max-width: 900px) {
+      .wheel-container {
+        width: 400px;
+        height: 400px;
+      }
+      .hero {
+        flex-direction: column;
+      }
+    }
+
+    [data-aos="fade-up"] {
+      transform: translateY(20px);
+      opacity: 0;
+      transition-property: transform, opacity;
+    }
+    [data-aos="fade-up"].aos-animate {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <header data-aos="fade-down" data-aos-duration="800">
+    <div class="logo"><i class="fas fa-cog" style="color: #ffd966; margin-right: 8px;"></i>Spin the Wheel</div>
+    <div class="nav-links">
+      <a href="#">Caratteristiche</a>
+      <a href="#">Come si usa</a>
+      <a href="#">Idee</a>
+    </div>
+    <button class="btn-glow"><i class="fas fa-user" style="margin-right: 8px;"></i>Accedi</button>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="wheel-col" data-aos="fade-right">
+        <div class="wheel-container">
+          <canvas id="wheelCanvas" width="500" height="500"></canvas>
+          <div class="pointer"></div>
+        </div>
+        <button class="spin-btn" id="spinButton"><i class="fas fa-play" style="margin-right: 10px;"></i>GIRA LA RUOTA</button>
+        <div class="result-message" id="resultMessage">Premi GIRA per cominciare</div>
+      </div>
+
+      <div class="settings-col" data-aos="fade-left">
+        <h3><i class="fas fa-pen"></i> Segmenti (illimitati)</h3>
+        <p style="margin-bottom: 1.5rem; color: #b0c4ff;">Aggiungi, modifica o elimina. La ruota si aggiorna in tempo reale.</p>
+        <div id="segments-list" class="segments-list"></div>
+        <button class="add-btn" id="addSegmentBtn"><i class="fas fa-plus"></i> Aggiungi segmento</button>
+      </div>
+    </div>
+
+    <section data-aos="fade-up">
+      <h2 class="section-title">✨ Funzionalità che contano</h2>
+      <div class="cards-grid">
+        <div class="feature-card glass-card">
+          <i class="fas fa-layer-group"></i>
+          <h3>Fino a 8 ruote</h3>
+          <p>Crea pagine con più ruote, giale singolarmente o tutte insieme. Ideale per lezioni ed eventi.</p>
+        </div>
+        <div class="feature-card glass-card">
+          <i class="fas fa-paint-brush"></i>
+          <h3>Segmenti personalizzati</h3>
+          <p>Testi, immagini, colori, temi e suoni: ogni ruota è unica come le tue idee.</p>
+        </div>
+        <div class="feature-card glass-card">
+          <i class="fas fa-music"></i>
+          <h3>Effetti e reazioni</h3>
+          <p>Aggiungi suoni, animazioni post-giro e probabilità variabili per maggiore pathos.</p>
+        </div>
+        <div class="feature-card glass-card">
+          <i class="fas fa-cloud-save"></i>
+          <h3>Salva e condividi</h3>
+          <p>Registrati gratis per conservare le tue ruote e usarle su qualsiasi dispositivo.</p>
+        </div>
+      </div>
+    </section>
+
+    <section data-aos="fade-up">
+      <h2 class="section-title">🌀 Come si usa</h2>
+      <div class="steps">
+        <div class="step-item" data-aos="flip-left" data-aos-delay="50">
+          <div class="step-num">1</div>
+          <h3>Inserisci voci</h3>
+          <p>Scrivi le opzioni nella ruota, aggiungi immagini o temi.</p>
+        </div>
+        <div class="step-item" data-aos="flip-left" data-aos-delay="150">
+          <div class="step-num">2</div>
+          <h3>Regola probabilità</h3>
+          <p>Dai più peso ad alcuni segmenti se lo desideri.</p>
+        </div>
+        <div class="step-item" data-aos="flip-left" data-aos-delay="250">
+          <div class="step-num">3</div>
+          <h3>Gira e scopri</h3>
+          <p>Clicca il pulsante e lascia che la ruota decida per te.</p>
+        </div>
+        <div class="step-item" data-aos="flip-left" data-aos-delay="350">
+          <div class="step-num">4</div>
+          <h3>Salva o duplica</h3>
+          <p>Con un account puoi portare le tue ruote sempre con te.</p>
+        </div>
+      </div>
+    </section>
+
+    <section data-aos="fade-up">
+      <h2 class="section-title">❤️ Modi popolari di utilizzo</h2>
+      <div class="cards-grid">
+        <div class="feature-card glass-card">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <h3>In classe</h3>
+          <p>Scegli studenti, argomenti, gruppi o attività. Perfetto per quiz interattivi.</p>
+        </div>
+        <div class="feature-card glass-card">
+          <i class="fas fa-gamepad"></i>
+          <h3>Serate in famiglia</h3>
+          <p>Obbligo o verità? Decidi che film guardare o cosa mangiare.</p>
+        </div>
+        <div class="feature-card glass-card">
+          <i class="fas fa-stream"></i>
+          <h3>Live streaming</h3>
+          <p>Sorteggi trasparenti, premi e challenge con più ruote in diretta.</p>
+        </div>
+        <div class="feature-card glass-card">
+          <i class="fas fa-users"></i>
+          <h3>Team building</h3>
+          <p>Assegna presentazioni, vota idee o rompi il ghiaccio senza imbarazzi.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Spin the Wheel — Segmenti illimitati, aggiornamento istantaneo</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    const canvas = document.getElementById('wheelCanvas');
+    const ctx = canvas.getContext('2d');
+    const spinBtn = document.getElementById('spinButton');
+    const resultMsg = document.getElementById('resultMessage');
+    const segmentsList = document.getElementById('segments-list');
+    const addBtn = document.getElementById('addSegmentBtn');
+
+    // Stato interno: array di segmenti { label, color }
+    let segments = [
+      { label: 'Pizza', color: '#FF6B6B' },
+      { label: 'Sushi', color: '#4ECDC4' },
+      { label: 'Hamburger', color: '#FFB347' }
+    ];
+
+    // Genera un colore pastello basato su un indice (per nuovi segmenti)
+    function generateColor(index) {
+      const hue = (index * 137.5) % 360; // 137.5 è un numero irrazionale per distribuire i colori
+      return `hsl(${hue}, 70%, 65%)`;
+    }
+
+    // Ricostruisce la lista input nel pannello, basandosi sull'array segments
+    function rebuildInputs() {
+      segmentsList.innerHTML = '';
+      segments.forEach((seg, idx) => {
+        const row = document.createElement('div');
+        row.className = 'segment-row';
+        row.innerHTML = `
+          <input type="text" class="segment-input" data-index="${idx}" value="${seg.label}" placeholder="Etichetta ${idx+1}">
+          <div class="delete-btn" data-index="${idx}"><i class="fas fa-trash"></i></div>
+        `;
+        segmentsList.appendChild(row);
+      });
+
+      // Attacca gli event listener per modifica in tempo reale
+      document.querySelectorAll('.segment-input').forEach(input => {
+        input.addEventListener('input', function(e) {
+          const index = this.dataset.index;
+          segments[index].label = this.value;
+          drawWheel(); // ridisegna subito
+        });
+      });
+
+      // Attacca gli event listener per eliminazione
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const index = this.dataset.index;
+          segments.splice(index, 1); // rimuove dall'array
+          rebuildInputs(); // ricostruisce input con nuovi indici
+          drawWheel();
+          if (segments.length === 0) {
+            resultMsg.innerHTML = '⚠️ Aggiungi almeno un segmento';
+          }
+        });
+      });
+    }
+
+    // Aggiunge un nuovo segmento
+    function addSegment() {
+      const newIndex = segments.length;
+      const newColor = generateColor(newIndex);
+      segments.push({ label: `Nuovo ${newIndex+1}`, color: newColor });
+      rebuildInputs();
+      drawWheel();
+    }
+
+    addBtn.addEventListener('click', addSegment);
+
+    // Disegna la ruota in base all'array segments
+    function drawWheel(rotationAngle = currentRotation) {
+      const width = canvas.width;
+      const height = canvas.height;
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const radius = width * 0.42;
+      ctx.clearRect(0, 0, width, height);
+
+      const count = segments.length;
+      if (count === 0) {
+        ctx.font = 'bold 24px Inter';
+        ctx.fillStyle = '#aaa';
+        ctx.fillText('Nessun segmento', centerX-100, centerY);
+        return;
+      }
+
+      const anglePerSegment = (Math.PI * 2) / count;
+      // Regola la dimensione del font in base al numero di segmenti
+      let fontSize = 22;
+      if (count > 12) fontSize = 18;
+      if (count > 18) fontSize = 15;
+      if (count > 24) fontSize = 13;
+
+      for (let i = 0; i < count; i++) {
+        const startAngle = i * anglePerSegment + rotationAngle;
+        const endAngle = (i + 1) * anglePerSegment + rotationAngle;
+
+        // spicchio
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+        ctx.closePath();
+        ctx.fillStyle = segments[i].color;
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff30';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // testo
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.rotate(startAngle + anglePerSegment / 2);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = `bold ${fontSize}px Inter, sans-serif`;
+        ctx.fillStyle = '#0a0f1a';
+        ctx.shadowColor = '#ffffff80';
+        ctx.shadowBlur = 8;
+        ctx.fillText(segments[i].label, radius * 0.7, 0);
+        ctx.restore();
+      }
+
+      // centro
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = '#FFD966';
+      ctx.shadowBlur = 20;
+      ctx.shadowColor = '#f0b300';
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    let currentRotation = 0;
+    let isSpinning = false;
+
+    function getSegmentFromAngle(angle) {
+      if (segments.length === 0) return null;
+      let norm = angle % (2 * Math.PI);
+      if (norm < 0) norm += 2 * Math.PI;
+      const segmentIndex = Math.floor(norm / ((2 * Math.PI) / segments.length));
+      return segments[segmentIndex];
+    }
+
+    spinBtn.addEventListener('click', () => {
+      if (isSpinning) return;
+      if (segments.length === 0) {
+        resultMsg.innerHTML = '⚠️ Aggiungi almeno un segmento';
+        return;
+      }
+      isSpinning = true;
+
+      const spins = 5;
+      const extra = Math.random() * 2 * Math.PI;
+      const newRotation = currentRotation + spins * 2 * Math.PI + extra;
+      const startTime = performance.now();
+      const duration = 3000;
+      const startRotation = currentRotation;
+
+      function animateSpin(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+        const currentAngle = startRotation + (newRotation - startRotation) * easeOutCubic;
+
+        drawWheel(currentAngle);
+
+        if (progress < 1) {
+          requestAnimationFrame(animateSpin);
+        } else {
+          isSpinning = false;
+          currentRotation = newRotation % (2 * Math.PI);
+          const seg = getSegmentFromAngle(currentRotation);
+          resultMsg.innerHTML = `🎯 Il segno è: <strong>${seg ? seg.label : '?'}</strong>`;
+        }
+      }
+      requestAnimationFrame(animateSpin);
+    });
+
+    // Inizializza la lista input e la ruota
+    rebuildInputs();
+    drawWheel();
+  </script>
+</body>
+</html>
