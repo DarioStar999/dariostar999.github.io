@@ -1,0 +1,1135 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --black: #050505;
+    --black-light: #0d080a;
+
+    --red-dark: #300812;
+    --red: #8f1630;
+    --red-light: #d93652;
+
+    --gold-dark: #8e672b;
+    --gold: #d2a653;
+    --gold-light: #f4d78f;
+
+    --white: #f5eee7;
+    --text: #cfc4bb;
+    --muted: #756b66;
+
+    --border: rgba(210, 166, 83, 0.3);
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family: "Inter", Arial, sans-serif;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(143, 22, 48, 0.3),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 100% 100%,
+            rgba(210, 166, 83, 0.06),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #030303,
+            #13070b 50%,
+            #050405
+        );
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.title {
+    min-height: 60vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    position: relative;
+    overflow: hidden;
+
+    padding: 60px 20px;
+}
+
+.title::before {
+    content: "✦";
+
+    position: absolute;
+
+    font-size: 450px;
+
+    color: rgba(210, 166, 83, 0.025);
+
+    animation: rotate 40s linear infinite;
+}
+
+.title::after {
+    content: "";
+
+    position: absolute;
+
+    width: 450px;
+    height: 450px;
+
+    border: 1px solid rgba(210, 166, 83, 0.12);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 80px rgba(143, 22, 48, 0.15),
+        inset 0 0 80px rgba(210, 166, 83, 0.04);
+
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.title h1 {
+    position: relative;
+    z-index: 2;
+
+    margin: 0;
+
+    font-family: "Cinzel", Georgia, serif;
+
+    font-size: clamp(42px, 7vw, 85px);
+
+    font-weight: 700;
+
+    letter-spacing: 5px;
+
+    color: var(--white);
+
+    text-shadow:
+        0 0 12px rgba(210, 166, 83, 0.35),
+        0 0 35px rgba(143, 22, 48, 0.45);
+
+    animation: appear 1s ease;
+}
+
+.title h1::after {
+    content: "";
+
+    display: block;
+
+    width: 180px;
+    height: 2px;
+
+    margin: 20px auto;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold),
+            var(--red-light),
+            var(--gold),
+            transparent
+        );
+
+    box-shadow: 0 0 12px rgba(210, 166, 83, 0.4);
+}
+
+.title p {
+    position: relative;
+    z-index: 2;
+
+    margin: 0;
+
+    color: #bcb1a8;
+
+    font-size: 15px;
+
+    letter-spacing: 3px;
+
+    animation: appear 1.4s ease;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.nav {
+    position: sticky;
+    top: 15px;
+
+    z-index: 100;
+
+    width: min(700px, calc(100% - 30px));
+
+    margin: -25px auto 35px;
+
+    padding: 8px;
+
+    display: flex;
+    justify-content: center;
+
+    gap: 8px;
+
+    background: rgba(5, 5, 5, 0.88);
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.6),
+        0 0 25px rgba(143, 22, 48, 0.08);
+}
+
+.nav a {
+    position: relative;
+
+    padding: 11px 30px;
+
+    color: var(--text);
+
+    text-decoration: none;
+
+    font-family: "Cinzel", Georgia, serif;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    border-radius: 8px;
+
+    transition: 0.3s;
+}
+
+.nav a::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 4px;
+    left: 50%;
+
+    width: 0;
+    height: 1px;
+
+    background: var(--gold);
+
+    transform: translateX(-50%);
+
+    transition: 0.3s;
+}
+
+.nav a:hover {
+    color: var(--gold-light);
+
+    background: rgba(143, 22, 48, 0.2);
+
+    transform: translateY(-2px);
+}
+
+.nav a:hover::after {
+    width: 60%;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    width: min(1100px, calc(100% - 30px));
+
+    margin: auto;
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+section {
+    position: relative;
+
+    margin-bottom: 35px;
+
+    padding: 35px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(29, 12, 17, 0.96),
+            rgba(7, 6, 7, 0.98)
+        );
+
+    border: 1px solid rgba(210, 166, 83, 0.18);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.55),
+        inset 0 0 50px rgba(143, 22, 48, 0.035);
+
+    overflow: hidden;
+}
+
+section::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 3px;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            var(--red),
+            var(--gold),
+            var(--red)
+        );
+
+    box-shadow:
+        0 0 20px rgba(143, 22, 48, 0.5);
+}
+
+
+/* =========================
+   PULL SECTION
+========================= */
+
+#pull {
+    min-height: 600px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+#pull > p {
+    margin: 0 0 25px;
+
+    font-family: "Cinzel", Georgia, serif;
+
+    font-size: 24px;
+
+    font-weight: 600;
+
+    color: var(--gold-light);
+
+    text-transform: uppercase;
+
+    letter-spacing: 4px;
+
+    text-shadow:
+        0 0 15px rgba(210, 166, 83, 0.2);
+}
+
+
+/* =========================
+   PULL CARD
+========================= */
+
+.cards-pull {
+    width: min(100%, 900px);
+    min-height: 430px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    margin-bottom: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    -webkit-mask-image:
+        linear-gradient(
+            90deg,
+            transparent,
+            black 16%,
+            black 84%,
+            transparent
+        );
+
+    mask-image:
+        linear-gradient(
+            90deg,
+            transparent,
+            black 16%,
+            black 84%,
+            transparent
+        );
+}
+
+.pull-marker {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 300px;
+    height: 430px;
+
+    border: 1px solid rgba(244, 215, 143, 0.55);
+
+    border-radius: 20px;
+
+    transform: translate(-50%, -50%);
+
+    box-shadow:
+        0 0 35px rgba(210, 166, 83, 0.18),
+        inset 0 0 30px rgba(210, 166, 83, 0.08);
+
+    pointer-events: none;
+
+    z-index: 5;
+}
+
+.pull-track {
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    padding: 10px calc(50% - 140px);
+
+    will-change: transform;
+}
+
+.card {
+    flex: 0 0 auto;
+
+    width: 280px;
+    height: 410px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1a080e,
+            #050405
+        );
+
+    border: 2px solid var(--gold);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 0 20px rgba(210, 166, 83, 0.12),
+        0 0 60px rgba(143, 22, 48, 0.15),
+        inset 0 0 50px rgba(143, 22, 48, 0.15);
+
+    animation: floating 4s ease-in-out infinite;
+
+    transition: 0.4s;
+}
+
+.card::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 7px;
+
+    border: 1px solid rgba(210, 166, 83, 0.25);
+
+    border-radius: 12px;
+
+    z-index: 3;
+
+    pointer-events: none;
+}
+
+.card::after {
+    content: "✦";
+
+    position: absolute;
+
+    font-size: 220px;
+
+    color: rgba(210, 166, 83, 0.025);
+
+    animation: rotate 25s linear infinite;
+
+    z-index: 1;
+}
+
+.card:hover {
+    transform:
+        translateY(-12px)
+        scale(1.03);
+
+    box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.7),
+        0 0 45px rgba(210, 166, 83, 0.25),
+        0 0 80px rgba(143, 22, 48, 0.2);
+}
+
+.pull-track.is-animating .card {
+    animation: none;
+}
+
+.card.is-winner {
+    box-shadow:
+        0 0 28px rgba(244, 215, 143, 0.4),
+        0 0 80px rgba(143, 22, 48, 0.25),
+        inset 0 0 50px rgba(143, 22, 48, 0.15);
+}
+
+.rarity-r1 {
+    border-color: #69b86f;
+}
+
+.rarity-r2 {
+    border-color: #4aa3df;
+}
+
+.rarity-r3 {
+    border-color: #b56cff;
+}
+
+.rarity-r4 {
+    border-color: #f4d78f;
+}
+
+.rarity-r5 {
+    border-color: #ff537c;
+}
+
+.rarity-r6 {
+    border-color: #ffffff;
+
+    box-shadow:
+        0 0 26px rgba(255, 255, 255, 0.22),
+        0 0 82px rgba(244, 215, 143, 0.2),
+        inset 0 0 50px rgba(143, 22, 48, 0.15);
+}
+
+.image-pull {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.pull-result {
+    min-height: 26px;
+
+    margin: -18px 0 22px;
+
+    color: var(--gold-light);
+
+    font-family: "Cinzel", Georgia, serif;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    letter-spacing: 1.5px;
+
+    text-align: center;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================
+   PULL BUTTONS
+========================= */
+
+.pull-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 18px;
+}
+
+.pull-buttons button {
+    min-width: 170px;
+
+    padding: 15px 25px;
+
+    border: 1px solid var(--gold);
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #74142b,
+            #250711
+        );
+
+    color: var(--gold-light);
+
+    font-family: "Cinzel", Georgia, serif;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.pull-buttons button:hover {
+    color: white;
+
+    transform:
+        translateY(-4px)
+        scale(1.04);
+
+    background:
+        linear-gradient(
+            135deg,
+            #a91d3b,
+            #4a0d1b
+        );
+
+    box-shadow:
+        0 12px 35px rgba(143, 22, 48, 0.45),
+        0 0 25px rgba(210, 166, 83, 0.15);
+}
+
+.pull-buttons button:active {
+    transform: scale(0.95);
+}
+
+.pull-buttons button:disabled,
+.inventory-actions button:disabled {
+    opacity: 0.55;
+
+    cursor: wait;
+
+    transform: none;
+}
+
+
+/* =========================
+   INVENTORY
+========================= */
+
+#inventory {
+    min-height: 500px;
+}
+
+.conteiner {
+    width: 100%;
+}
+
+.inventory-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-bottom: 18px;
+}
+
+.inventory-actions button {
+    padding: 10px 16px;
+
+    border: 1px solid rgba(210, 166, 83, 0.4);
+
+    border-radius: 8px;
+
+    background: rgba(5, 5, 5, 0.55);
+
+    color: var(--gold-light);
+
+    font-family: "Cinzel", Georgia, serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.inventory-actions button:hover {
+    border-color: var(--gold);
+
+    background: rgba(143, 22, 48, 0.22);
+}
+
+.cards {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(180px, 1fr));
+
+    gap: 25px;
+}
+
+
+/* =========================
+   INVENTORY CARD
+========================= */
+
+.inventory-card {
+    position: relative;
+
+    padding: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(35, 12, 18, 0.95),
+            rgba(7, 6, 7, 0.98)
+        );
+
+    border: 1px solid rgba(210, 166, 83, 0.25);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.45);
+
+    transition: 0.35s;
+
+    overflow: hidden;
+}
+
+.inventory-card::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 5px;
+
+    border: 1px solid rgba(210, 166, 83, 0.08);
+
+    border-radius: 10px;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+.inventory-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    top: -50px;
+    right: -50px;
+
+    background: rgba(210, 166, 83, 0.08);
+
+    border-radius: 50%;
+
+    filter: blur(20px);
+
+    transition: 0.4s;
+}
+
+.inventory-card:hover {
+    transform:
+        translateY(-10px)
+        scale(1.03);
+
+    border-color: var(--gold);
+
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.65),
+        0 0 30px rgba(210, 166, 83, 0.13),
+        0 0 45px rgba(143, 22, 48, 0.12);
+}
+
+.inventory-card:hover::after {
+    transform: scale(2);
+}
+
+
+/* =========================
+   INVENTORY IMAGE
+========================= */
+
+.image-inv {
+    width: 100%;
+
+    aspect-ratio: 2 / 3;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #16080c,
+            #050405
+        );
+
+    transition: 0.35s;
+
+    position: relative;
+
+    z-index: 1;
+}
+
+.inventory-card:hover .image-inv {
+    filter: brightness(1.08);
+
+    transform: scale(1.015);
+}
+
+
+/* =========================
+   CARD NAME
+========================= */
+
+.card-name {
+    margin: 12px 4px 6px;
+
+    text-align: center;
+
+    color: var(--gold-light);
+
+    font-family: "Cinzel", Georgia, serif;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.5px;
+
+    position: relative;
+
+    z-index: 4;
+}
+
+.card-meta {
+    display: block;
+
+    margin: 0 4px 8px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    position: relative;
+
+    text-align: center;
+
+    text-transform: uppercase;
+
+    z-index: 4;
+}
+
+.empty-inventory {
+    grid-column: 1 / -1;
+
+    margin: 35px 0;
+
+    color: var(--muted);
+
+    font-family: "Cinzel", Georgia, serif;
+
+    text-align: center;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    margin-top: 60px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    background: #040304;
+
+    border-top: 1px solid rgba(210, 166, 83, 0.2);
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+}
+
+footer strong {
+    color: var(--gold-light);
+
+    font-family: "Cinzel", Georgia, serif;
+
+    letter-spacing: 3px;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes appear {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(0.95);
+
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(1.05);
+
+        opacity: 1;
+    }
+}
+
+@keyframes floating {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 700px) {
+
+    .title {
+        min-height: 55vh;
+    }
+
+    .title h1 {
+        font-size: 42px;
+
+        letter-spacing: 2px;
+    }
+
+    .title p {
+        font-size: 13px;
+
+        letter-spacing: 2px;
+    }
+
+    .nav {
+        width: calc(100% - 20px);
+    }
+
+    .nav a {
+        padding: 9px 16px;
+
+        font-size: 11px;
+    }
+
+    section {
+        padding: 25px 18px;
+    }
+
+    .card {
+        width: 230px;
+        height: 340px;
+    }
+
+    .cards-pull {
+        min-height: 360px;
+    }
+
+    .pull-marker {
+        width: 248px;
+        height: 358px;
+    }
+
+    .pull-track {
+        padding: 10px calc(50% - 115px);
+    }
+
+    .pull-buttons {
+        width: 100%;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+    .pull-buttons button {
+        width: 100%;
+    }
+
+    .cards {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 12px;
+    }
+}
+
+
+/* =========================
+   PHONE
+========================= */
+
+@media (max-width: 450px) {
+
+    .title h1 {
+        font-size: 34px;
+
+        letter-spacing: 1px;
+    }
+
+    .title p {
+        font-size: 11px;
+    }
+
+    #pull > p {
+        font-size: 19px;
+
+        letter-spacing: 2px;
+    }
+
+    .card {
+        width: 190px;
+        height: 285px;
+    }
+
+    .cards-pull {
+        min-height: 305px;
+    }
+
+    .pull-marker {
+        width: 208px;
+        height: 304px;
+    }
+
+    .pull-track {
+        gap: 16px;
+
+        padding: 10px calc(50% - 95px);
+    }
+
+    .cards {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 10px;
+    }
+
+    .inventory-card {
+        padding: 5px;
+    }
+
+    .card-name {
+        font-size: 10px;
+
+        letter-spacing: 1px;
+    }
+}

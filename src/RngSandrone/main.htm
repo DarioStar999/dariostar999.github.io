@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sandrone RNG Game</title>
+        <link rel="stylesheet" href="src/css/style.css">
+        <link rel="icon" href="src/assets/icon/icon.ico">
+        <script src="src/js/cards-manifest.js" defer></script>
+        <script src="src/js/script.js" defer></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="title">
+            <h1>Sandrone RNG Game</h1>
+            <p>Sandrone RNG Card Game Theme</p>
+        </div>
+        <div class="nav">
+            <a href="#pull">pull</a>
+            <a href="#inventory">inventory</a>
+        </div>
+        <main>
+            <section id="pull">
+                <p>Pull Here</p>
+                <div class="cards-pull">
+                    <div class="pull-marker" aria-hidden="true"></div>
+                    <div class="pull-track" id="pullTrack"></div>
+                </div>
+                <div class="pull-result" id="pullResult" aria-live="polite">Ready</div>
+                <div class="pull-buttons">
+                    <button id="pullx1">pull x1</button>
+                    <button id="pullx10">pull x10</button>
+                </div>
+            </section>
+            <section id="inventory">
+                <div class="conteiner">
+                    <div class="inventory-actions">
+                        <button id="clearInventory" type="button">clear inventory</button>
+                    </div>
+                    <div class="cards" id="inventoryCards">
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer><strong>SANDRONE RNG GAME</strong> MADE BY HYPOSELENIA</footer>
+    </body>
+</html>
