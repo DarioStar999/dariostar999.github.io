@@ -1,0 +1,543 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --black: #050505;
+    --black-light: #0d0d0f;
+
+    --red-dark: #3b0712;
+    --red: #9b1735;
+    --red-light: #e33d5d;
+
+    --gold: #d4a84f;
+    --gold-light: #f3d58c;
+
+    --white: #f5f1ec;
+    --text: #c8c1bb;
+    --muted: #706b68;
+
+    --border: rgba(212, 168, 79, 0.25);
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    font-family: "Inter", Arial, sans-serif;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(155, 23, 53, 0.3),
+            transparent 40%
+        ),
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(212, 168, 79, 0.08),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #030303,
+            #12070b 50%,
+            #050505
+        );
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    width: min(900px, calc(100% - 30px));
+
+    margin: auto;
+
+    padding: 50px 0;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.title {
+    position: relative;
+
+    padding: 80px 30px 60px;
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+.title::before {
+    content: "✦";
+
+    position: absolute;
+
+    top: -180px;
+    left: 50%;
+
+    font-size: 400px;
+
+    color: rgba(212, 168, 79, 0.025);
+
+    transform: translateX(-50%);
+
+    animation: rotate 35s linear infinite;
+
+    pointer-events: none;
+}
+
+.title h1 {
+    position: relative;
+    z-index: 2;
+
+    margin: 0;
+
+    font-family: "Cinzel", Georgia, serif;
+
+    font-size: clamp(42px, 8vw, 75px);
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    color: var(--white);
+
+    text-shadow:
+        0 0 15px rgba(212, 168, 79, 0.3),
+        0 0 40px rgba(155, 23, 53, 0.35);
+
+    animation: appear 0.9s ease;
+}
+
+.title h1::after {
+    content: "";
+
+    display: block;
+
+    width: 150px;
+    height: 2px;
+
+    margin: 20px auto 22px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold),
+            var(--red-light),
+            var(--gold),
+            transparent
+        );
+
+    box-shadow:
+        0 0 12px rgba(212, 168, 79, 0.4);
+}
+
+.title p {
+    position: relative;
+    z-index: 2;
+
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 16px;
+
+    letter-spacing: 2px;
+
+    animation: appear 1.2s ease;
+}
+
+
+/* =========================
+   BOX
+========================= */
+
+.box {
+    position: relative;
+
+    padding: 35px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25, 10, 15, 0.95),
+            rgba(8, 8, 9, 0.97)
+        );
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.6),
+        inset 0 0 50px rgba(155, 23, 53, 0.04);
+
+    overflow: hidden;
+
+    animation: appear 1.4s ease;
+}
+
+.box::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 3px;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            var(--red),
+            var(--gold),
+            var(--red)
+        );
+
+    box-shadow:
+        0 0 20px rgba(155, 23, 53, 0.5);
+}
+
+.box::after {
+    content: "";
+
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    right: -150px;
+    top: -150px;
+
+    border-radius: 50%;
+
+    background: rgba(212, 168, 79, 0.04);
+
+    filter: blur(10px);
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.buttons {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+
+/* =========================
+   LINKS
+========================= */
+
+.buttons a {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 65px;
+
+    padding: 18px 25px;
+
+    color: var(--white);
+
+    text-decoration: none;
+
+    font-family: "Cinzel", Georgia, serif;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(100, 13, 32, 0.8),
+            rgba(25, 9, 14, 0.9)
+        );
+
+    border: 1px solid rgba(212, 168, 79, 0.2);
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s,
+        border-color 0.3s,
+        box-shadow 0.3s,
+        background 0.3s;
+}
+
+
+/* Freccina */
+
+.buttons a::after {
+    content: "→";
+
+    color: var(--gold);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 22px;
+
+    transform: translateX(0);
+
+    transition: 0.3s;
+}
+
+
+/* Effetto luce */
+
+.buttons a::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 70%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.06),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition: 0.6s;
+}
+
+.buttons a:hover {
+    color: var(--gold-light);
+
+    transform:
+        translateX(6px)
+        scale(1.01);
+
+    border-color: rgba(212, 168, 79, 0.55);
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(143, 22, 48, 0.9),
+            rgba(42, 10, 19, 0.95)
+        );
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.45),
+        0 0 25px rgba(155, 23, 53, 0.15);
+}
+
+.buttons a:hover::before {
+    left: 130%;
+}
+
+.buttons a:hover::after {
+    transform: translateX(5px);
+
+    color: var(--gold-light);
+}
+
+
+/* =========================
+   DIFFERENZIAZIONE BOTTONI
+========================= */
+
+.buttons a:nth-child(1) {
+    border-left: 3px solid #ffffff;
+}
+
+.buttons a:nth-child(2) {
+    border-left: 3px solid var(--gold);
+}
+
+.buttons a:nth-child(3) {
+    border-left: 3px solid var(--red-light);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    margin-top: auto;
+
+    padding: 25px;
+
+    text-align: center;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+    background: rgba(3, 3, 3, 0.8);
+
+    border-top: 1px solid rgba(212, 168, 79, 0.15);
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes appear {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+@keyframes rotate {
+
+    from {
+        transform:
+            translateX(-50%)
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            rotate(360deg);
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    main {
+        width: calc(100% - 20px);
+
+        padding: 25px 0;
+    }
+
+    .title {
+        padding: 60px 15px 40px;
+    }
+
+    .title h1 {
+        font-size: 38px;
+
+        letter-spacing: 1px;
+    }
+
+    .title p {
+        font-size: 13px;
+
+        line-height: 1.6;
+
+        letter-spacing: 1px;
+    }
+
+    .box {
+        padding: 20px 15px;
+    }
+
+    .buttons a {
+        min-height: 58px;
+
+        padding: 15px 18px;
+
+        font-size: 13px;
+    }
+
+    .buttons a::after {
+        font-size: 18px;
+    }
+
+    footer {
+        padding: 20px;
+
+        font-size: 11px;
+    }
+}
+
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width: 400px) {
+
+    .title h1 {
+        font-size: 31px;
+    }
+
+    .title p {
+        font-size: 12px;
+    }
+
+    .box {
+        padding: 15px 12px;
+    }
+
+    .buttons {
+        gap: 12px;
+    }
+
+    .buttons a {
+        padding: 14px;
+
+        font-size: 12px;
+    }
+}
