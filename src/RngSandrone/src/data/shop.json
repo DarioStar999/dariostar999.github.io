@@ -1,0 +1,46 @@
+{
+    "autoclickers": [
+        {
+            "id": "clockwork_helper",
+            "name": "Clockwork Helper",
+            "description": "Generates Sandrocoin every second.",
+            "baseCost": 75,
+            "costMultiplier": 1.18,
+            "coinsPerSecond": 1
+        },
+        {
+            "id": "sandrone_worker",
+            "name": "Sandrone Worker",
+            "description": "A stronger automatic Sandrocoin source.",
+            "baseCost": 450,
+            "costMultiplier": 1.22,
+            "coinsPerSecond": 7
+        },
+        {
+            "id": "automatron",
+            "name": "Automatron",
+            "description": "Expensive, but prints coins fast.",
+            "baseCost": 2500,
+            "costMultiplier": 1.28,
+            "coinsPerSecond": 45
+        }
+    ],
+    "clickUpgrades": [
+        {
+            "id": "polished_coin",
+            "name": "Polished Coin",
+            "description": "Each manual click gives more Sandrocoin.",
+            "baseCost": 250,
+            "costMultiplier": 1.75,
+            "clickPower": 1
+        },
+        {
+            "id": "golden_glove",
+            "name": "Golden Glove",
+            "description": "A heavy upgrade for active clicking.",
+            "baseCost": 1500,
+            "costMultiplier": 2.1,
+            "clickPower": 5
+        }
+    ]
+}

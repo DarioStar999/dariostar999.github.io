@@ -16,9 +16,39 @@
         </div>
         <div class="nav">
             <a href="#pull">pull</a>
+            <a href="#sandrocoin">coin</a>
             <a href="#inventory">inventory</a>
+            <a href="#card-index">index</a>
+            <a href="#achievements">achievement</a>
         </div>
         <main>
+            <section id="dashboard" class="dashboard">
+                <div class="stat-panel coin-panel">
+                    <span>Sandrocoin</span>
+                    <strong id="coinAmount">0</strong>
+                    <small id="coinRate">+0/s</small>
+                </div>
+                <div class="stat-panel">
+                    <span>Total Pull</span>
+                    <strong id="totalPulls">0</strong>
+                    <small id="pullCostLabel">165 each</small>
+                </div>
+                <div class="stat-panel">
+                    <span>Last R5</span>
+                    <strong id="sinceR5">0</strong>
+                    <small>pulls ago</small>
+                </div>
+                <div class="stat-panel">
+                    <span>Last R6</span>
+                    <strong id="sinceR6">0</strong>
+                    <small>pulls ago</small>
+                </div>
+                <div class="stat-panel danger-panel">
+                    <span>Save Data</span>
+                    <strong>Reset</strong>
+                    <button id="resetAllData" type="button">reset all data</button>
+                </div>
+            </section>
             <section id="pull">
                 <p>Pull Here</p>
                 <div class="cards-pull">
@@ -27,20 +57,57 @@
                 </div>
                 <div class="pull-result" id="pullResult" aria-live="polite">Ready</div>
                 <div class="pull-buttons">
-                    <button id="pullx1">pull x1</button>
-                    <button id="pullx10">pull x10</button>
+                    <button id="pullx1"><span>pull x1</span><small>165 Sandrocoin</small></button>
+                    <button id="pullx10" class="premium-pull"><span>pull x10</span><small>10 cards reveal</small></button>
+                    <button id="autoPullToggle" class="auto-pull"><span>auto pull</span><small id="autoPullState">off</small></button>
+                </div>
+                <div class="x10-results" id="x10Results"></div>
+                <div class="history-panel">
+                    <h2>Last Pulls</h2>
+                    <div class="history-list" id="historyList"></div>
+                </div>
+            </section>
+            <section id="sandrocoin">
+                <div class="coin-clicker">
+                    <button id="coinClickButton" type="button">
+                        <span>Forge Sandrocoin</span>
+                        <strong>+<span id="clickPowerLabel">1</span></strong>
+                    </button>
+                    <div class="shop">
+                        <h2>Shop</h2>
+                        <div class="shop-grid" id="shopItems"></div>
+                    </div>
                 </div>
             </section>
             <section id="inventory">
                 <div class="conteiner">
                     <div class="inventory-actions">
+                        <div class="inventory-filters" id="inventoryFilters"></div>
                         <button id="clearInventory" type="button">clear inventory</button>
                     </div>
                     <div class="cards" id="inventoryCards">
                     </div>
                 </div>
             </section>
+            <section id="card-index">
+                <h2>Card Index</h2>
+                <div class="index-grid" id="cardIndexGrid"></div>
+            </section>
+            <section id="achievements">
+                <h2>Achievement Index</h2>
+                <div class="achievement-grid" id="achievementGrid"></div>
+            </section>
         </main>
+        <div class="card-viewer" id="cardViewer" aria-hidden="true">
+            <button class="card-viewer-close" id="cardViewerClose" type="button">close</button>
+            <div class="card-viewer-content">
+                <img id="cardViewerImage" src="" alt="">
+                <div class="card-viewer-info">
+                    <span id="cardViewerRarity"></span>
+                    <strong id="cardViewerName"></strong>
+                </div>
+            </div>
+        </div>
         <footer><strong>SANDRONE RNG GAME</strong> MADE BY HYPOSELENIA</footer>
     </body>
 </html>
